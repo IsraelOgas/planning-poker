@@ -1,8 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
-import { act } from "react-dom/test-utils";
-import { Toolbar } from "./Toolbar";
+import {act} from "react-dom/test-utils";
+import {Toolbar} from "./Toolbar";
 
 const mockHistoryPush = jest.fn();
 
@@ -18,12 +18,12 @@ jest.mock("@material-ui/core", () => ({
 }));
 
 describe("Toolbar component", () => {
-  const { location } = window;
+  const {location} = window;
   beforeAll(() => {
     // @ts-ignore
-    delete window.location;
+    // delete window.location;
     // @ts-ignore
-    window.location = { href: "" };
+    window.location = {href: ""};
   });
 
   afterAll((): void => {
