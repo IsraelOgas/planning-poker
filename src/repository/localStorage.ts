@@ -1,6 +1,6 @@
-import { PlayerGame } from '../types/player';
+import { PlayerGame } from "../types/player";
 
-const playerGamesStoreName = 'playerGames';
+const playerGamesStoreName = "playerGames";
 
 export const getPlayerGamesFromCache = (): PlayerGame[] => {
   let playerGames: PlayerGame[] = [];
@@ -14,7 +14,9 @@ export const getPlayerGamesFromCache = (): PlayerGame[] => {
 
 export const isGameInPlayerCache = (gameId: string): boolean => {
   const playerGames = getPlayerGamesFromCache();
-  const found = playerGames.find((playerGames) => playerGames.gameId === gameId);
+  const found = playerGames.find(
+    (playerGames) => playerGames.gameId === gameId
+  );
   if (found) {
     return true;
   }

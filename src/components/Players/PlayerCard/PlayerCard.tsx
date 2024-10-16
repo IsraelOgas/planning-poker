@@ -1,14 +1,18 @@
-import { Card, CardContent, CardHeader, IconButton, Typography } from '@material-ui/core';
-import React from 'react';
-import { Game, GameType } from '../../../types/game';
-import { Player } from '../../../types/player';
-import { Status } from '../../../types/status';
-import { getCards } from '../CardPicker/CardConfigs';
-import './PlayerCard.css';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForeverTwoTone';
-import { red } from '@material-ui/core/colors';
-import { removePlayer } from '../../../service/players';
-import { isModerator } from '../../../utils/isModerator';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  IconButton,
+  Typography,
+} from "@material-ui/core";
+import React from "react";
+import { Player, Status, GameType, Game } from "@/types";
+import { getCards } from "../CardPicker/CardConfigs";
+import "./PlayerCard.css";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForeverTwoTone";
+import { red } from "@material-ui/core/colors";
+import { removePlayer } from "@/service";
+import { isModerator } from "@/utils/isModerator";
 
 interface PlayerCardProps {
   game: Game;
@@ -16,40 +20,48 @@ interface PlayerCardProps {
   currentPlayerId: string;
 }
 
-export const PlayerCard: React.FC<PlayerCardProps> = ({ game, player, currentPlayerId }) => {
+export const PlayerCard: React.FC<PlayerCardProps> = ({
+  game,
+  player,
+  currentPlayerId,
+}) => {
   const removeUser = (gameId: string, playerId: string) => {
     removePlayer(gameId, playerId);
   };
 
   return (
     <Card
-      variant='outlined'
-      className='PlayerCard'
+      variant="outlined"
+      className="PlayerCard"
       style={{
         backgroundColor: getCardColor(game, player.value),
       }}
     >
       <CardHeader
-        className='PlayerCardTitle'
+        className="PlayerCardTitle"
         title={player.name}
-        titleTypographyProps={{ variant: 'subtitle2', noWrap: true, title: player.name }}
+        titleTypographyProps={{
+          variant: "subtitle2",
+          noWrap: true,
+          title: player.name,
+        }}
         action={
           isModerator(game.createdById, currentPlayerId) &&
           player.id !== currentPlayerId && (
             <IconButton
-              title='Remove'
-              className='RemoveButton'
+              title="Remove"
+              className="RemoveButton"
               onClick={() => removeUser(game.id, player.id)}
-              data-testid='remove-button'
-              color='primary'
+              data-testid="remove-button"
+              color="primary"
             >
-              <DeleteForeverIcon fontSize='small' style={{ color: red[300] }} />
+              <DeleteForeverIcon fontSize="small" style={{ color: red[300] }} />
             </IconButton>
           )
         }
       />
-      <CardContent className='PlayerCardContent'>
-        <Typography variant='h2' className='PlayerCardContentMiddle'>
+      <CardContent className="PlayerCardContent">
+        <Typography variant="h2" className="PlayerCardContentMiddle">
           {getCardValue(player, game)}
         </Typography>
       </CardContent>
@@ -59,25 +71,25 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({ game, player, currentPla
 
 const getCardColor = (game: Game, value: number | undefined): string => {
   if (game.gameStatus !== Status.Finished) {
-    return 'var(--color-background-secondary)';
+    return "var(--color-background-secondary)";
   }
   const card = getCards(game.gameType).find((card) => card.value === value);
-  return card ? card.color : 'var(--color-background-secondary)';
+  return card ? card.color : "var(--color-background-secondary)";
 };
 
 const getCardValue = (player: Player, game: Game) => {
   if (game.gameStatus !== Status.Finished) {
-    return player.status === Status.Finished ? '👍' : '🤔';
+    return player.status === Status.Finished ? "👍" : "🤔";
   }
 
   if (game.gameStatus === Status.Finished) {
     if (player.status === Status.Finished) {
       if (player.value && player.value === -1) {
-        return player.emoji || '☕'; // coffee emoji
+        return player.emoji || "☕"; // coffee emoji
       }
       return getCardDisplayValue(game.gameType, player.value);
     }
-    return '🤔';
+    return "🤔";
   }
 };
 
@@ -85,5 +97,8 @@ const getCardDisplayValue = (
   gameType: GameType | undefined,
   cardValue: number | undefined
 ): string | number | undefined => {
-  return getCards(gameType).find((card) => card.value === cardValue)?.displayValue || cardValue;
+  return (
+    getCards(gameType).find((card) => card.value === cardValue)?.displayValue ||
+    cardValue
+  );
 };

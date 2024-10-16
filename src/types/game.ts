@@ -1,4 +1,4 @@
-import { Status } from './status';
+import { Status } from "./status";
 
 export interface Game {
   id: string;
@@ -20,7 +20,7 @@ export interface NewGame {
 }
 
 export enum GameType {
-  Fibonacci = 'Fibonacci',
-  ShortFibonacci = 'ShortFibonacci',
-  TShirt = 'TShirt',
+  Fibonacci = "Fibonacci",
+  ShortFibonacci = "ShortFibonacci",
+  TShirt = "TShirt",
 }

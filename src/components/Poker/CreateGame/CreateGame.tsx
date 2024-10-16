@@ -9,27 +9,37 @@ import {
   Radio,
   RadioGroup,
   TextField,
-} from '@material-ui/core';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { uniqueNamesGenerator, Config, starWars, colors, animals } from 'unique-names-generator';
-import { useHistory } from 'react-router-dom';
-import { addNewGame } from '../../../service/games';
-import { GameType, NewGame } from '../../../types/game';
-import './CreateGame.css';
+} from "@material-ui/core";
+import { ChangeEvent, FormEvent, useState } from "react";
+import {
+  uniqueNamesGenerator,
+  Config,
+  starWars,
+  colors,
+  animals,
+} from "unique-names-generator";
+import { useHistory } from "react-router-dom";
+import { addNewGame } from "@/service";
+import { GameType, NewGame } from "@/types";
+import "./CreateGame.css";
 
 const gameNameConfig: Config = {
   dictionaries: [colors, animals],
-  separator: ' ',
-  style: 'capital',
-}
+  separator: " ",
+  style: "capital",
+};
 const userNameConfig: Config = {
-  dictionaries: [starWars]
-}
+  dictionaries: [starWars],
+};
 
 export const CreateGame = () => {
   const history = useHistory();
-  const [gameName, setGameName] = useState(uniqueNamesGenerator(gameNameConfig));
-  const [createdBy, setCreatedBy] = useState(uniqueNamesGenerator(userNameConfig));
+  const [gameName, setGameName] = useState(
+    uniqueNamesGenerator(gameNameConfig)
+  );
+  const [createdBy, setCreatedBy] = useState(
+    uniqueNamesGenerator(userNameConfig)
+  );
   const [gameType, setGameType] = useState(GameType.Fibonacci);
   const [hasDefaults, setHasDefaults] = useState({ game: true, name: true });
   const [loading, setLoading] = useState(false);
@@ -44,7 +54,7 @@ export const CreateGame = () => {
       createdAt: new Date(),
     };
     const newGameId = await addNewGame(game);
-    if(newGameId){
+    if (newGameId) {
       setLoading(false);
     }
     history.push(`/game/${newGameId}`);
@@ -52,14 +62,14 @@ export const CreateGame = () => {
 
   const emptyGameName = () => {
     if (hasDefaults.game) {
-      setGameName('');
+      setGameName("");
       hasDefaults.game = false;
       setHasDefaults(hasDefaults);
     }
   };
   const emptyCreatorName = () => {
     if (hasDefaults.name) {
-      setCreatedBy('');
+      setCreatedBy("");
       hasDefaults.name = false;
       setHasDefaults(hasDefaults);
     }
@@ -68,38 +78,42 @@ export const CreateGame = () => {
   return (
     <Grow in={true} timeout={1000}>
       <form onSubmit={handleSubmit}>
-        <Card variant='outlined' className='CreateGameCard'>
+        <Card variant="outlined" className="CreateGameCard">
           <CardHeader
-            className='CreateGameCardHeader'
-            title='Create New Session'
-            titleTypographyProps={{ variant: 'h4' }}
+            className="CreateGameCardHeader"
+            title="Create New Session"
+            titleTypographyProps={{ variant: "h4" }}
           />
-          <CardContent className='CreateGameCardContent'>
+          <CardContent className="CreateGameCardContent">
             <TextField
-              className='CreateGameTextField'
+              className="CreateGameTextField"
               required
-              id='filled-required'
-              label='Session Name'
-              placeholder='Enter a session name'
-              value={gameName || ''}
+              id="filled-required"
+              label="Session Name"
+              placeholder="Enter a session name"
+              value={gameName || ""}
               onClick={() => emptyGameName()}
-              variant='outlined'
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setGameName(event.target.value)}
+              variant="outlined"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setGameName(event.target.value)
+              }
             />
             <TextField
-              className='CreateGameTextField'
+              className="CreateGameTextField"
               required
-              id='filled-required'
-              label='Your Name'
-              placeholder='Enter your name'
-              value={createdBy || ''}
+              id="filled-required"
+              label="Your Name"
+              placeholder="Enter your name"
+              value={createdBy || ""}
               onClick={() => emptyCreatorName()}
-              variant='outlined'
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setCreatedBy(event.target.value)}
+              variant="outlined"
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setCreatedBy(event.target.value)
+              }
             />
             <RadioGroup
-              aria-label='gender'
-              name='gender1'
+              aria-label="gender"
+              name="gender1"
               value={gameType}
               onChange={(
                 event: ChangeEvent<{
@@ -110,23 +124,30 @@ export const CreateGame = () => {
             >
               <FormControlLabel
                 value={GameType.Fibonacci}
-                control={<Radio color='primary' size='small' />}
-                label='Fibonacci (0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89)'
+                control={<Radio color="primary" size="small" />}
+                label="Fibonacci (0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89)"
               />
               <FormControlLabel
                 value={GameType.ShortFibonacci}
-                control={<Radio color='primary' size='small' />}
-                label='Short Fibonacci (0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100)'
+                control={<Radio color="primary" size="small" />}
+                label="Short Fibonacci (0, ½, 1, 2, 3, 5, 8, 13, 20, 40, 100)"
               />
               <FormControlLabel
                 value={GameType.TShirt}
-                control={<Radio color='primary' size='small' />}
-                label='T-Shirt (XXS, XS, S, M, L, XL, XXL)'
+                control={<Radio color="primary" size="small" />}
+                label="T-Shirt (XXS, XS, S, M, L, XL, XXL)"
               />
             </RadioGroup>
           </CardContent>
-          <CardActions className='CreateGameCardAction'>
-            <Button type='submit' variant='contained' color='primary' className='CreateGameButton' data-testid="loading" disabled={loading}>
+          <CardActions className="CreateGameCardAction">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="CreateGameButton"
+              data-testid="loading"
+              disabled={loading}
+            >
               Create
             </Button>
           </CardActions>

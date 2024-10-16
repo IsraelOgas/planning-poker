@@ -1,4 +1,4 @@
-import { ulid } from 'ulid';
+import { ulid } from "ulid";
 import {
   addGameToStore,
   addPlayerToGameInStore,
@@ -7,12 +7,12 @@ import {
   streamData,
   streamPlayersFromStore,
   updateGameDataInStore,
-  removeGameFromStore
-} from '../repository/firebase';
-import { NewGame } from '../types/game';
-import { Player } from '../types/player';
-import { Status } from '../types/status';
-import { resetPlayers, updatePlayerGames } from './players';
+  removeGameFromStore,
+} from "../repository/firebase";
+import { NewGame } from "../types/game";
+import { Player } from "../types/player";
+import { Status } from "../types/status";
+import { resetPlayers, updatePlayerGames } from "./players";
 
 export const addNewGame = async (newGame: NewGame): Promise<string> => {
   const player = {
@@ -46,7 +46,10 @@ export const getGame = (id: string) => {
   return getGameFromStore(id);
 };
 
-export const updateGame = async (gameId: string, updatedGame: any): Promise<boolean> => {
+export const updateGame = async (
+  gameId: string,
+  updatedGame: any
+): Promise<boolean> => {
   await updateGameDataInStore(gameId, updatedGame);
   return true;
 };
@@ -80,7 +83,11 @@ export const getAverage = (players: Player[]): number => {
   let values = 0;
   let numberOfPlayersPlayed = 0;
   players.forEach((player) => {
-    if (player.status === Status.Finished && player.value && player.value >= 0) {
+    if (
+      player.status === Status.Finished &&
+      player.value &&
+      player.value >= 0
+    ) {
       values = values + player.value;
       numberOfPlayersPlayed++;
     }
@@ -104,7 +111,7 @@ export const getGameStatus = (players: Player[]): Status => {
 export const updateGameStatus = async (gameId: string): Promise<boolean> => {
   const game = await getGame(gameId);
   if (!game) {
-    console.log('Game not found');
+    console.log("Game not found");
     return false;
   }
   const players = await getPlayersFromStore(gameId);

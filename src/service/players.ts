@@ -1,4 +1,4 @@
-import { ulid } from 'ulid';
+import { ulid } from "ulid";
 import {
   addPlayerToGameInStore,
   getGameFromStore,
@@ -6,12 +6,15 @@ import {
   getPlayersFromStore,
   removePlayerFromGameInStore,
   updatePlayerInStore,
-} from '../repository/firebase';
-import { getPlayerGamesFromCache, updatePlayerGamesInCache } from '../repository/localStorage';
-import { Game } from '../types/game';
-import { Player, PlayerGame } from '../types/player';
-import { Status } from '../types/status';
-import { updateGameStatus } from './games';
+} from "../repository/firebase";
+import {
+  getPlayerGamesFromCache,
+  updatePlayerGamesInCache,
+} from "../repository/localStorage";
+import { Game } from "../types/game";
+import { Player, PlayerGame } from "../types/player";
+import { Status } from "../types/status";
+import { updateGameStatus } from "./games";
 
 export const addPlayer = async (gameId: string, player: Player) => {
   const game = await getGameFromStore(gameId);
@@ -26,7 +29,12 @@ export const removePlayer = async (gameId: string, playerId: string) => {
     removePlayerFromGameInStore(gameId, playerId);
   }
 };
-export const updatePlayerValue = async (gameId: string, playerId: string, value: number, randomEmoji: string) => {
+export const updatePlayerValue = async (
+  gameId: string,
+  playerId: string,
+  value: number,
+  randomEmoji: string
+) => {
   const player = await getPlayerFromStore(gameId, playerId);
 
   if (player) {
@@ -78,9 +86,13 @@ export const updatePlayerGames = (gameId: string, playerId: string) => {
   updatePlayerGamesInCache(playerGames);
 };
 
-export const isCurrentPlayerInGame = async (gameId: string): Promise<boolean> => {
+export const isCurrentPlayerInGame = async (
+  gameId: string
+): Promise<boolean> => {
   const playerGames = getPlayerGamesFromCache();
-  const found = playerGames.find((playerGames) => playerGames.gameId === gameId);
+  const found = playerGames.find(
+    (playerGames) => playerGames.gameId === gameId
+  );
   if (found) {
     const player = await getPlayerFromStore(found.gameId, found.playerId);
 
@@ -101,14 +113,19 @@ export const isPlayerInGameStore = async (gameId: string, playerId: string) => {
 
 export const removeGameFromCache = (gameId: string) => {
   const playerGames = getPlayerGamesFromCache();
-  updatePlayerGamesInCache(playerGames.filter((playerGame) => playerGame.gameId !== gameId));
+  updatePlayerGamesInCache(
+    playerGames.filter((playerGame) => playerGame.gameId !== gameId)
+  );
 };
 
-export const addPlayerToGame = async (gameId: string, playerName: string): Promise<boolean> => {
+export const addPlayerToGame = async (
+  gameId: string,
+  playerName: string
+): Promise<boolean> => {
   const joiningGame = await getGameFromStore(gameId);
 
   if (!joiningGame) {
-    console.log('Game not found');
+    console.log("Game not found");
     return false;
   }
   const newPlayer = { name: playerName, id: ulid(), status: Status.NotStarted };

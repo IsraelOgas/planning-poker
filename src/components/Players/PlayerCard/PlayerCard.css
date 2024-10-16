@@ -17,14 +17,14 @@
   text-align: center;
   border-radius: 16px;
   border: 2px solid var(--color-primary);
-  background-color:  var(--color-background);
+  background-color: var(--color-background);
   margin: -20px auto 0;
   width: 88%;
   padding: 16px;
   height: 40px;
 }
 
-.RemoveButton{
+.RemoveButton {
   margin-top: -20px;
 }
 
@@ -41,5 +41,3 @@
   display: flex;
   justify-content: center;
 }
-
-

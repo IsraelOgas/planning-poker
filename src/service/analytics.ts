@@ -1,2 +1,2 @@
-import firebase from 'firebase/app';
-firebase.analytics();
+// import firebase from "firebase/app";
+// firebase.analytics();
