@@ -1,13 +1,15 @@
-import { Divider, Grid, Slide, Typography, Box } from "@material-ui/core";
-import { useRouteMatch } from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import {Divider, Grid, Slide, Typography, Box} from "@material-ui/core";
+import {useRouteMatch} from "react-router-dom";
 
-import { Footer, CreateGame, JoinGame, RecentGames } from "@/components";
+import {Footer, CreateGame, JoinGame, RecentGames} from "@/components";
 import LandingImage from "@/images/background.jpg";
 import SessionControllerImage from "@/images/Session.jpg";
 import "./HomePage.css";
 
 export const HomePage = () => {
   const isJoin = useRouteMatch("/join");
+  const {t} = useTranslation();
 
   return (
     <>
@@ -28,7 +30,7 @@ export const HomePage = () => {
           <Grid item sm={12} lg={6}>
             <Slide direction="down" in={true} timeout={500}>
               <div className="HomePageContainer">
-                <Typography variant="h5">Free Planning Poker App</Typography>
+                <Typography variant="h5">{t("home.title")}</Typography>
                 <Box padding={2}>
                   <img
                     alt="Free Planning Poker App"
@@ -37,9 +39,7 @@ export const HomePage = () => {
                   ></img>
                 </Box>
                 <Typography variant="subtitle1">
-                  Free / Open source Planning Poker Web App to estimate user
-                  stories for your Agile/Scrum teams. Create a session and
-                  invite your team members to estimate user stories efficiently.
+                  {t("home.description")}
                 </Typography>
               </div>
             </Slide>

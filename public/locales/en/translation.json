@@ -1,0 +1,10 @@
+{
+    "home": {
+        "title": "Welcome to PlanningPokerApp",
+        "description": "Free and open-source web application for Planning Poker, designed to estimate user stories in Agile/Scrum teams. Create a session and invite your team members to estimate user stories efficiently."
+    },
+    "description": {
+        "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
+        "part2": "Switch language between english and german using buttons above."
+    }
+}
