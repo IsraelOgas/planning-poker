@@ -60,7 +60,7 @@ export const Toolbar = () => {
                 color="inherit"
                 onClick={() =>
                   (window.location.href =
-                    "https://github.com/hellomuthu23/planning-poker")
+                    "https://github.com/IsraelOgas/planning-poker")
                 }
               >
                 <GithubIcon></GithubIcon>

@@ -12,19 +12,19 @@ export const Footer = () => {
             <div className="FooterItemContainer">
               <CopyrightIcon color="secondary" fontSize="small" />
               <Typography color="textSecondary" variant="body2">
-                hellomuthu23
+                Developed by @hellomuthu23
               </Typography>
             </div>
 
             <Divider orientation="vertical" flexItem></Divider>
             <div className="FooterItemContainer">
               <Typography color="textSecondary" variant="body2">
-                Feedback: hellomuthu23@gmail.com
+                Customized by @IsraelOgas
               </Typography>
             </div>
 
             <Divider orientation="vertical" flexItem></Divider>
-            <Link href="https://github.com/hellomuthu23/planning-poker/issues">
+            <Link href="https://github.com/IsraelOgas/planning-poker/issues">
               Submit an Issue
             </Link>
           </div>
