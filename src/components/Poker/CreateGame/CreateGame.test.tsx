@@ -77,6 +77,36 @@ describe("CreateGame component", () => {
         createdBy: "Rock",
         gameType: "Fibonacci",
         name: "Marvels",
+        isAllowMembersToManageSession: false,
+      })
+    );
+  });
+  it("should be able to create new session with Allow members to manage session", async () => {
+    render(<CreateGame />);
+    const sessionName = screen.getByPlaceholderText("Enter a session name");
+    userEvent.clear(sessionName);
+    userEvent.type(sessionName, "Marvels");
+
+    const userName = screen.getByPlaceholderText("Enter your name");
+    userEvent.clear(userName);
+    userEvent.type(userName, "Rock");
+
+    const allowMembersToManageSession = screen.getByText(
+      "Allow members to manage session"
+    );
+    userEvent.click(allowMembersToManageSession);
+
+    const createButton = screen.getByText("Create");
+    userEvent.click(createButton);
+
+    expect(gamesService.addNewGame).toHaveBeenCalled();
+
+    expect(gamesService.addNewGame).toHaveBeenCalledWith(
+      expect.objectContaining({
+        createdBy: "Rock",
+        gameType: "Fibonacci",
+        name: "Marvels",
+        isAllowMembersToManageSession: true,
       })
     );
   });

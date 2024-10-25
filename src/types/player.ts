@@ -11,4 +11,5 @@ export interface Player {
 export interface PlayerGame {
   gameId: string;
   playerId: string;
+  isAllowMembersToManageSession?: boolean;
 }

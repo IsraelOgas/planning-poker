@@ -4,6 +4,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Checkbox,
   FormControlLabel,
   Grow,
   Radio,
@@ -43,6 +44,8 @@ export const CreateGame = () => {
   const [gameType, setGameType] = useState(GameType.Fibonacci);
   const [hasDefaults, setHasDefaults] = useState({ game: true, name: true });
   const [loading, setLoading] = useState(false);
+  const [allowMembersToManageSession, setAllowMembersToManageSession] =
+    useState(false);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -51,6 +54,7 @@ export const CreateGame = () => {
       name: gameName,
       createdBy: createdBy,
       gameType: gameType,
+      isAllowMembersToManageSession: allowMembersToManageSession,
       createdAt: new Date(),
     };
     const newGameId = await addNewGame(game);
@@ -138,6 +142,18 @@ export const CreateGame = () => {
                 label="T-Shirt (XXS, XS, S, M, L, XL, XXL)"
               />
             </RadioGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  color="primary"
+                  checked={allowMembersToManageSession}
+                  onChange={() =>
+                    setAllowMembersToManageSession(!allowMembersToManageSession)
+                  }
+                />
+              }
+              label="Allow members to manage session"
+            />
           </CardContent>
           <CardActions className="CreateGameCardAction">
             <Button

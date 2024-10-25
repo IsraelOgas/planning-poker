@@ -6,6 +6,7 @@ export interface Game {
   average: number;
   gameStatus: Status;
   gameType?: GameType | GameType.Fibonacci;
+  isAllowMembersToManageSession?: boolean;
   createdBy: string;
   createdById: string;
   createdAt: Date;
@@ -15,6 +16,7 @@ export interface Game {
 export interface NewGame {
   name: string;
   gameType: string;
+  isAllowMembersToManageSession?: boolean;
   createdBy: string;
   createdAt: Date;
 }

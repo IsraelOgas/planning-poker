@@ -46,7 +46,11 @@ export const PlayerCard: React.FC<PlayerCardProps> = ({
           title: player.name,
         }}
         action={
-          isModerator(game.createdById, currentPlayerId) &&
+          isModerator(
+            game.createdById,
+            currentPlayerId,
+            game.isAllowMembersToManageSession
+          ) &&
           player.id !== currentPlayerId && (
             <IconButton
               title="Remove"
@@ -77,6 +81,17 @@ const getCardColor = (game: Game, value: number | undefined): string => {
   return card ? card.color : "var(--color-background-secondary)";
 };
 
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * Returns a string to display as the value of a PlayerCard.
+ * If the game is not finished, displays a thumbs up emoji if the player has voted, or a thinking face emoji if they have not.
+ * If the game is finished, displays the player's vote value as a string, or a coffee emoji if they voted -1.
+ * If the player has not voted, displays a thinking face emoji.
+ * @param player - The player to get the card value for.
+ * @param game - The game that the player is in.
+ * @returns A string to display as the value of the PlayerCard.
+ */
+/******  6144cc5d-a805-4899-978f-a86d54535c8a  *******/
 const getCardValue = (player: Player, game: Game) => {
   if (game.gameStatus !== Status.Finished) {
     return player.status === Status.Finished ? "👍" : "🤔";

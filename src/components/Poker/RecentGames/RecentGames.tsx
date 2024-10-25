@@ -94,7 +94,8 @@ export const RecentGames = () => {
                     <TableCell align="left">{recentGame.createdBy}</TableCell>
                     {isModerator(
                       recentGame.createdById,
-                      getCurrentPlayerId(recentGame.id)
+                      getCurrentPlayerId(recentGame.id),
+                      recentGame.isAllowMembersToManageSession
                     ) ? (
                       <TableCell
                         align="center"
