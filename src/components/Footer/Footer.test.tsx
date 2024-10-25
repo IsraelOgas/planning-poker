@@ -1,6 +1,6 @@
-import {render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import React from "react";
-import {Footer} from "./Footer";
+import { Footer } from "./Footer";
 
 const mockHistoryPush = jest.fn();
 
@@ -11,11 +11,11 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("Footer component", () => {
-  const {location} = window;
+  const { location } = window;
   beforeAll(() => {
     // delete window.location;
     // @ts-ignore
-    window.location = {href: ""};
+    window.location = { href: "" };
   });
 
   afterAll((): void => {

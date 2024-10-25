@@ -1,15 +1,15 @@
-import {useTranslation} from "react-i18next";
-import {Divider, Grid, Slide, Typography, Box} from "@material-ui/core";
-import {useRouteMatch} from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { Divider, Grid, Slide, Typography, Box } from "@material-ui/core";
+import { useRouteMatch } from "react-router-dom";
 
-import {Footer, CreateGame, JoinGame, RecentGames} from "@/components";
+import { Footer, CreateGame, JoinGame, RecentGames } from "@/components";
 import LandingImage from "@/images/background.jpg";
 import SessionControllerImage from "@/images/Session.jpg";
 import "./HomePage.css";
 
 export const HomePage = () => {
   const isJoin = useRouteMatch("/join");
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <>
