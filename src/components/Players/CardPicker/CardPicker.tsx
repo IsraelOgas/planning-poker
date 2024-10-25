@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { updatePlayerValue } from "@/service";
 import { Player, Status, Game } from "@/types";
 import { CardConfig, getCards, getRandomEmoji } from "./CardConfigs";
@@ -30,6 +31,8 @@ export const CardPicker: React.FC<CardPickerProps> = ({
   };
   const cards = getCards(game.gameType);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (game.gameStatus === Status.Started) {
       setRandomEmoji(getRandomEmoji);
@@ -45,7 +48,7 @@ export const CardPicker: React.FC<CardPickerProps> = ({
                 <Slide
                   in={true}
                   direction={"right"}
-                  timeout={(1000 * index) / 2}
+                  timeout={(300 * index) / 2}
                 >
                   <Card
                     id={`card-${card.displayValue}`}
@@ -99,8 +102,8 @@ export const CardPicker: React.FC<CardPickerProps> = ({
         </div>
         <Typography variant="h6">
           {game.gameStatus !== Status.Finished
-            ? "Click on the card to vote"
-            : "Session not ready for Voting! Wait for moderator to start"}
+            ? t("card-picker.text-click-to-vote")
+            : t("card-picker.text-session-not-started")}
         </Typography>
       </div>
     </Grow>

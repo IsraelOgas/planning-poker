@@ -15,8 +15,9 @@ import LinkIcon from "@material-ui/icons/Link";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import DeleteOutlined from "@material-ui/icons/DeleteForeverTwoTone";
 import Alert from "@material-ui/lab/Alert";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { finishGame, resetGame, removeGame } from "@/service";
 import { Game, GameType } from "@/types";
 import { isModerator } from "@/utils/isModerator";
@@ -34,6 +35,7 @@ export const GameController: React.FC<GameControllerProps> = ({
 }) => {
   const history = useHistory();
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const { t } = useTranslation();
   const copyInviteLink = () => {
     const dummy = document.createElement("input");
     const url = `${window.location.origin}/join/${game.id}`;
@@ -54,6 +56,19 @@ export const GameController: React.FC<GameControllerProps> = ({
     window.location.href = "/";
   };
 
+  const statusSession = useMemo(() => {
+    switch (game.gameStatus) {
+      case "In Progress":
+        return t("game-controller.text-status-in-progress");
+      case "Started":
+        return t("game-controller.text-status-started");
+      case "Finished":
+        return t("game-controller.text-status-finished");
+      default:
+        return t("game-controller.text-status-not-started");
+    }
+  }, [game.gameStatus]);
+
   return (
     <Grow in={true} timeout={2000}>
       <div className="GameController">
@@ -63,7 +78,7 @@ export const GameController: React.FC<GameControllerProps> = ({
             titleTypographyProps={{ variant: "h6" }}
             action={
               <div className="GameControllerCardHeaderAverageContainer">
-                <Typography variant="subtitle1">{game.gameStatus}</Typography>
+                <Typography variant="subtitle1">{statusSession}</Typography>
                 {game.gameType !== GameType.TShirt && (
                   <>
                     <Divider
@@ -71,7 +86,9 @@ export const GameController: React.FC<GameControllerProps> = ({
                       orientation="vertical"
                       flexItem
                     />
-                    <Typography variant="subtitle1">Average:</Typography>
+                    <Typography variant="subtitle1">
+                      {t("game-controller.text-average")}:
+                    </Typography>
                     <Typography
                       variant="subtitle1"
                       className="GameControllerCardHeaderAverageValue"
@@ -104,7 +121,9 @@ export const GameController: React.FC<GameControllerProps> = ({
                       />
                     </IconButton>
                   </div>
-                  <Typography variant="caption">Reveal</Typography>
+                  <Typography variant="caption">
+                    {t("game-controller.button-reveal")}
+                  </Typography>
                 </div>
 
                 <div className="GameControllerButtonContainer">
@@ -116,7 +135,9 @@ export const GameController: React.FC<GameControllerProps> = ({
                       <RefreshIcon fontSize="large" color="error" />
                     </IconButton>
                   </div>
-                  <Typography variant="caption">Restart</Typography>
+                  <Typography variant="caption">
+                    {t("game-controller.button-restart")}
+                  </Typography>
                 </div>
 
                 <div className="GameControllerButtonContainer">
@@ -135,7 +156,9 @@ export const GameController: React.FC<GameControllerProps> = ({
                       </IconButton>
                     </AlertDialog>
                   </div>
-                  <Typography variant="caption">Delete</Typography>
+                  <Typography variant="caption">
+                    {t("game-controller.button-delete")}
+                  </Typography>
                 </div>
               </>
             )}
@@ -148,7 +171,9 @@ export const GameController: React.FC<GameControllerProps> = ({
                   <ExitToApp fontSize="large" style={{ color: orange[500] }} />
                 </IconButton>
               </div>
-              <Typography variant="caption">Exit</Typography>
+              <Typography variant="caption">
+                {t("game-controller.button-exit")}
+              </Typography>
             </div>
             <div
               title="Copy invite link"
@@ -162,7 +187,9 @@ export const GameController: React.FC<GameControllerProps> = ({
                   <LinkIcon fontSize="large" style={{ color: blue[500] }} />
                 </IconButton>
               </div>
-              <Typography variant="caption">Invite</Typography>
+              <Typography variant="caption">
+                {t("game-controller.button-invite")}
+              </Typography>
             </div>
           </CardContent>
         </Card>
@@ -172,7 +199,7 @@ export const GameController: React.FC<GameControllerProps> = ({
           autoHideDuration={5000}
           onClose={() => setShowCopiedMessage(false)}
         >
-          <Alert severity="success">Invite Link copied to clipboard!</Alert>
+          <Alert severity="success">{t("game-controller.toast-invite")}</Alert>
         </Snackbar>
       </div>
     </Grow>

@@ -24,7 +24,8 @@
     "preview": "vite preview",
     "test": "jest test --detectOpenHandles",
     "lint": "eslint .",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier . --write"
   },
   "eslintConfig": {
     "extends": [

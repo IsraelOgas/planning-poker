@@ -3,8 +3,26 @@
     "title": "Bienvenid@s a PlanningPokerApp",
     "description": "Aplicación web gratuita y de código abierto para Planning Poker, diseñada para estimar historias de usuario en equipos Agile/Scrum. Crea una sesión e invita a los miembros de tu equipo para estimar historias de usuario de manera eficiente."
   },
-  "description": {
-    "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
-    "part2": "Switch language between english and german using buttons above."
+  "game-controller": {
+    "button-reveal": "Revelar",
+    "button-restart": "Reiniciar",
+    "button-delete": "Eliminar",
+    "button-exit": "Salir",
+    "button-invite": "Invitar",
+    "toast-invite": "¡Enlace de invitación copiado al portapapeles!",
+    "text-started": "Iniciado",
+    "text-average": "Promedio",
+    "text-status-in-progress": "En progreso",
+    "text-status-started": "Iniciado",
+    "text-status-finished": "Finalizado",
+    "text-status-not-started": "No iniciado"
+  },
+  "card-picker": {
+    "text-session-not-started": "Sesión no lista para votar. Espera a que el moderador comience",
+    "text-click-to-vote": "Haz clic en la tarjeta para votar"
+  },
+  "toolbar": {
+    "button-new-session": "Nueva sesión",
+    "button-join-session": "Unirse a una sesión"
   }
 }

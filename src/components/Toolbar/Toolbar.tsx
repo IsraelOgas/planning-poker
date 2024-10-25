@@ -12,8 +12,11 @@ import { LightModeIcon, DarkModeIcon } from "@/assets";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import MergeTypeOutlinedIcon from "@material-ui/icons/MergeTypeOutlined";
 import { useHistory } from "react-router-dom";
-import "./Toolbar.css";
+import { useTranslation } from "react-i18next";
 import { useThemeContext } from "@/context/ThemeProviderComponent";
+
+import "./Toolbar.css";
+
 export const title = "Planning Poker";
 
 export const Toolbar = () => {
@@ -23,6 +26,7 @@ export const Toolbar = () => {
   );
 
   const { currentTheme, toggleTheme } = useThemeContext();
+  const { t } = useTranslation();
 
   return (
     <Slide direction="down" in={true} timeout={800}>
@@ -44,12 +48,12 @@ export const Toolbar = () => {
             </div>
             <div>
               <Button
-                title="New Session"
+                title={t("toolbar.button-new-session")}
                 startIcon={<AddCircleOutlineIcon />}
                 color="inherit"
                 onClick={() => history.push("/")}
               >
-                {!isSmallScreen ? "New Session" : null}
+                {!isSmallScreen ? t("toolbar.button-new-session") : null}
               </Button>
               <Button
                 startIcon={<MergeTypeOutlinedIcon />}
@@ -57,7 +61,7 @@ export const Toolbar = () => {
                 color="inherit"
                 onClick={() => history.push("/join")}
               >
-                {!isSmallScreen ? "Join Session" : null}
+                {!isSmallScreen ? t("toolbar.button-join-session") : null}
               </Button>
               <Button
                 id="github-button"
