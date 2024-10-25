@@ -3,7 +3,7 @@
 }
 
 .CreateGameButton {
-  color: var(--color-background);
+  color: white;
   width: 70%;
   border-radius: 40px;
 }

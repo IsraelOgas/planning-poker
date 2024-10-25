@@ -8,10 +8,12 @@ import {
 } from "@material-ui/core";
 import GamesIcon from "@material-ui/icons/Games";
 import GithubIcon from "@material-ui/icons/GitHub";
+import { LightModeIcon, DarkModeIcon } from "@/assets";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import MergeTypeOutlinedIcon from "@material-ui/icons/MergeTypeOutlined";
 import { useHistory } from "react-router-dom";
 import "./Toolbar.css";
+import { useThemeContext } from "@/context/ThemeProviderComponent";
 export const title = "Planning Poker";
 
 export const Toolbar = () => {
@@ -19,6 +21,8 @@ export const Toolbar = () => {
   const isSmallScreen = useMediaQuery((theme: any) =>
     theme.breakpoints.down("xs")
   );
+
+  const { currentTheme, toggleTheme } = useThemeContext();
 
   return (
     <Slide direction="down" in={true} timeout={800}>
@@ -64,6 +68,13 @@ export const Toolbar = () => {
                 }
               >
                 <GithubIcon></GithubIcon>
+              </Button>
+              <Button variant="outlined" color="default" onClick={toggleTheme}>
+                {currentTheme === "light" ? (
+                  <LightModeIcon fill="black" width={25} />
+                ) : (
+                  <DarkModeIcon fill="white" width={25} />
+                )}
               </Button>
             </div>
           </div>

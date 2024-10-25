@@ -6,3 +6,11 @@
   --color-warning: orangered;
   --color-border: grey;
 }
+.DarkTheme {
+  --color-primary: #75a1de;
+  --color-secondary: #d7d7d7;
+  --color-background: #374961;
+  --color-background-secondary: #2a394d;
+  --color-warning: orangered;
+  --color-border: grey;
+}
