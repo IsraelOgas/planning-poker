@@ -17,6 +17,7 @@ export const Poker = () => {
   );
 
   useEffect(() => {
+    console.log("[Poker] useEffect ejecutado", { id });
     let effectCleanup = true;
 
     if (effectCleanup) {
@@ -29,7 +30,7 @@ export const Poker = () => {
       setIsLoading(true);
     }
 
-    streamGame(id).onSnapshot((snapshot) => {
+    const unsubscribeGame = streamGame(id).onSnapshot((snapshot) => {
       if (effectCleanup) {
         if (snapshot.exists) {
           const data = snapshot.data();
@@ -43,7 +44,7 @@ export const Poker = () => {
       }
     });
 
-    streamPlayers(id).onSnapshot((snapshot) => {
+    const unsubscribePlayers = streamPlayers(id).onSnapshot((snapshot) => {
       if (effectCleanup) {
         const players: Player[] = [];
         snapshot.forEach((snapshot) => {
@@ -53,12 +54,21 @@ export const Poker = () => {
         if (!players.find((player) => player.id === currentPlayerId)) {
           history.push(`/join/${id}`);
         }
+        // Log para depuración de duplicados
+        const ids = players.map(p => p.id);
+        const uniqueIds = new Set(ids);
+        if (ids.length !== uniqueIds.size) {
+          console.warn("[Poker] Jugadores duplicados detectados", { ids });
+        }
         setPlayers(players);
       }
     });
 
     return () => {
       effectCleanup = false;
+      unsubscribeGame();
+      unsubscribePlayers();
+      console.log("[Poker] useEffect cleanup ejecutado", { id });
     };
   }, [id, history]);
 

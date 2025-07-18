@@ -14,10 +14,12 @@ export const Players: React.FC<PlayersProps> = ({
   players,
   currentPlayerId,
 }) => {
+  // Filtra jugadores duplicados por id
+  const uniquePlayers = [...new Map(players.map(p => [p.id, p])).values()];
   return (
     <Grow in={true} timeout={800}>
       <div className="PlayersContainer">
-        {players.map((player: Player) => (
+        {uniquePlayers.map((player: Player) => (
           <PlayerCard
             key={player.id}
             game={game}
