@@ -11,7 +11,7 @@ Free / Open source Scrum/Agile Planning Poker Web App to estimate user stories f
 
 ## Live Site
 
-- <https://planning-poker-agile.web.app/>
+- <https://planning-poker-v2-9c45e.web.app/>
 
 ## Home Page
 
