@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "planning-poker-agile",
+    "site": "planning-poker-v2-9c45e",
     "public": "build",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
